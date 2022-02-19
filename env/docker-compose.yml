@@ -1,0 +1,53 @@
+version: "3"
+services:
+  dbcommand:
+    image: postgres:9.6
+    container_name: "dbcommand"
+    restart: always
+    environment:
+      - POSTGRES_DB=dborder
+      - POSTGRES_USER=order
+      - POSTGRES_PASSWORD=order
+      - TZ=GMT
+    ports:
+      - 5432:5432
+  dbquery:
+    image: "cassandra:4.0"
+    container_name: "dbquery"
+    restart: always
+    environment:
+      - CASSANDRA_CLUSTER_NAME=dborder
+    ports:
+      - 9042:9042
+    volumes:
+#      - ./db-cassandra-schema:/docker-entrypoint-initdb.d/
+      - ~/apps/cassandra:/var/lib/cassandra
+
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 2
+    extra_hosts:
+      - "moby:127.0.0.1"
+      - "localhost: 127.0.0.1"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    extra_hosts:
+      - "moby:127.0.0.1"
+      - "localhost: 127.0.0.1"
