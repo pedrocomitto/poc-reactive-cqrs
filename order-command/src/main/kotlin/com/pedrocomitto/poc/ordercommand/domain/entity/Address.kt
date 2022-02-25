@@ -7,11 +7,12 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "order_item")
-data class OrderItem(
+@Table(name = "addresses")
+data class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
     val description: String,
-    val code: String
+    val number: String,
+    val zipCode: String,
 )

@@ -23,7 +23,7 @@ class MongoConfig : AbstractReactiveMongoConfiguration() {
         MongoClients.create(
             MongoClientSettings.builder()
                 .uuidRepresentation(UuidRepresentation.JAVA_LEGACY)
-                .applyConnectionString(ConnectionString("mongodb://dborder:dborder@localhost:27018"))
+                .applyConnectionString(ConnectionString("mongodb://order:order@localhost:27018"))
                 .build()
         )
 

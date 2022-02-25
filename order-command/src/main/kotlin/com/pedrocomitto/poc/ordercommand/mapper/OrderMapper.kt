@@ -1,23 +1,40 @@
 package com.pedrocomitto.poc.ordercommand.mapper
 
+import com.pedrocomitto.poc.ordercommand.domain.entity.Address
+import com.pedrocomitto.poc.ordercommand.domain.entity.Customer
 import com.pedrocomitto.poc.ordercommand.domain.entity.Order
+import com.pedrocomitto.poc.ordercommand.domain.entity.OrderItem
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderStatus
-import com.pedrocomitto.poc.ordercommand.domain.event.OrderEvent
-import com.pedrocomitto.poc.ordercommand.request.OrderRequest
+import com.pedrocomitto.poc.ordercommand.domain.request.AddressRequest
+import com.pedrocomitto.poc.ordercommand.domain.request.CustomerRequest
+import com.pedrocomitto.poc.ordercommand.domain.request.OrderItemRequest
+import com.pedrocomitto.poc.ordercommand.domain.request.OrderRequest
 
-fun OrderRequest.toEntity() =
+
+fun OrderRequest.toEntity(status: OrderStatus) =
     Order(
-        type = type,
-        status = OrderStatus.PREPARING,
-        items = items.map { it.toItem() },
-        customer = customer.toCustomer(),
+        items = items.map { it.toEntity() },
+        customer = customer.toEntity(),
+        address = address.toEntity(),
+        status = status
     )
 
-fun Order.toEvent() =
-    OrderEvent(
-        id = id,
-        type = type,
-        status = status,
-        items = items.map { it.toEvent() },
-        customer = customer.toEvent(),
+fun OrderItemRequest.toEntity() =
+    OrderItem(
+        description = description,
+        code = code
+    )
+
+fun CustomerRequest.toEntity() =
+    Customer(
+        customerId = customerId,
+        name = name,
+        document = document
+    )
+
+fun AddressRequest.toEntity() =
+    Address(
+        description = description,
+        number = number,
+        zipCode = zipCode
     )

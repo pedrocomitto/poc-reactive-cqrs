@@ -1,6 +1,7 @@
 package com.pedrocomitto.poc.ordercommand.domain.event
 
-data class OrderItemEvent(
+data class AddressEvent(
     val description: String,
-    val code: String
+    val number: String,
+    val zipCode: String,
 )

@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       - POSTGRES_DB=dborder
-      - POSTGRES_USER=dborder
-      - POSTGRES_PASSWORD=dborder
+      - POSTGRES_USER=order
+      - POSTGRES_PASSWORD=order
       - TZ=GMT
     ports:
       - 5432:5432
@@ -16,8 +16,8 @@ services:
     image: mongo:latest
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: dborder
-      MONGO_INITDB_ROOT_PASSWORD: dborder
+      MONGO_INITDB_ROOT_USERNAME: order
+      MONGO_INITDB_ROOT_PASSWORD: order
       MONGO_INITDB_DATABASE: dborderquery
     ports:
       - 27018:27017
