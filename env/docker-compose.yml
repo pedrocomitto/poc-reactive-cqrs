@@ -2,17 +2,15 @@ version: "3"
 services:
 
   dbcommand:
-    image: mongo:latest
+    image: postgres:9.6
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: dborder
-      MONGO_INITDB_ROOT_PASSWORD: dborder
-      MONGO_INITDB_DATABASE: dbordercommand
+      - POSTGRES_DB=dborder
+      - POSTGRES_USER=dborder
+      - POSTGRES_PASSWORD=dborder
+      - TZ=GMT
     ports:
-      - 27017:27017
-    volumes:
-      - mongodb_data_command:/data/db/command
-      - ./mongo/dbordercommand-init.js:/docker-entrypoint-initdb.d/dbordercommand-init.js:ro
+      - 5432:5432
 
   dbquery:
     image: mongo:latest
@@ -56,5 +54,4 @@ services:
       - "localhost: 127.0.0.1"
 
 volumes:
-  mongodb_data_command:
   mongodb_data_query:
