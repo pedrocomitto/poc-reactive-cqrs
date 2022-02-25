@@ -13,5 +13,5 @@ data class Tracking(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
     val statusCode: String,
-    val status: String
+    val status: String,
 )

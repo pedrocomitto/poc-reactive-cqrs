@@ -1,9 +1,17 @@
 package com.pedrocomitto.poc.ordercommand.domain.entity
 
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderStatus
+import org.hibernate.annotations.GeneratorType
+import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Type
+import org.hibernate.id.UUIDGenerationStrategy
+import org.hibernate.id.UUIDGenerator
+import org.hibernate.type.UUIDBinaryType
+import org.hibernate.type.UUIDCharType
+import org.springframework.data.domain.Persistable
 import java.util.UUID
 import javax.persistence.CascadeType
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
@@ -18,13 +26,18 @@ import javax.persistence.Table
 @Table(name = "orders")
 data class Order(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: UUID = UUID.randomUUID(),
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator",
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    var id: UUID = UUID.randomUUID(),
 
     val status: OrderStatus,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", columnDefinition = "UUID")
     val items: List<OrderItem> = mutableListOf(),
 
     @OneToOne(cascade = [CascadeType.ALL])
@@ -33,7 +46,7 @@ data class Order(
     @OneToOne(cascade = [CascadeType.ALL])
     val address: Address,
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", columnDefinition = "")
-    val trackings: List<Tracking> = mutableListOf()
+//    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+//    @JoinColumn(name = "order_id", columnDefinition = "UUID")
+//    val trackings: List<Tracking> = mutableListOf()
 )

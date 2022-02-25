@@ -35,6 +35,7 @@ class CreatedOrderConsumer(
 
 }
 
+
 interface CreatedOrderConsumerSubscriber {
 
     fun process(consumerRecord: ConsumerRecord<String, OrderEvent>)
@@ -56,3 +57,4 @@ class ChatBotSubscriber(
     }
 
 }
+

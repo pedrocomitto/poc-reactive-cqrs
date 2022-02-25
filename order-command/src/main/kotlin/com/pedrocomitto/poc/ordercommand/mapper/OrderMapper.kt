@@ -9,14 +9,15 @@ import com.pedrocomitto.poc.ordercommand.domain.request.AddressRequest
 import com.pedrocomitto.poc.ordercommand.domain.request.CustomerRequest
 import com.pedrocomitto.poc.ordercommand.domain.request.OrderItemRequest
 import com.pedrocomitto.poc.ordercommand.domain.request.OrderRequest
+import java.util.UUID
 
 
 fun OrderRequest.toEntity(status: OrderStatus) =
     Order(
-        items = items.map { it.toEntity() },
+//        items = items.map { it.toEntity() },
         customer = customer.toEntity(),
         address = address.toEntity(),
-        status = status
+        status = status,
     )
 
 fun OrderItemRequest.toEntity() =
