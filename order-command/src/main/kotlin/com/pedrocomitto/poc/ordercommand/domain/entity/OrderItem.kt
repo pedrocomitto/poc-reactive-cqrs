@@ -1,4 +1,4 @@
-package com.pedrocomitto.poc.ordercommand.domain.document
+package com.pedrocomitto.poc.ordercommand.domain.entity
 
 data class OrderItem(
     val id: Long,

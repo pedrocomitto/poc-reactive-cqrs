@@ -1,6 +1,6 @@
 package com.pedrocomitto.poc.ordercommand.mapper
 
-import com.pedrocomitto.poc.ordercommand.domain.document.OrderItem
+import com.pedrocomitto.poc.ordercommand.domain.entity.OrderItem
 import com.pedrocomitto.poc.ordercommand.domain.event.OrderItemEvent
 import com.pedrocomitto.poc.ordercommand.request.OrderItemRequest
 
