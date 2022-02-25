@@ -1,20 +1,20 @@
 package com.pedrocomitto.poc.orderquery.handler
 
-import com.pedrocomitto.poc.orderquery.repository.OrderRepository
+import com.pedrocomitto.poc.orderquery.repository.ChatBotOrderRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyAndAwait
 
 @Component
-class OrderHandler(
-    private val orderRepository: OrderRepository
+class ChatBotOrderHandler(
+    private val chatBotOrderRepository: ChatBotOrderRepository
 ) {
 
-    suspend fun findAll(request: ServerRequest) =
+    suspend fun find(request: ServerRequest) =
         ServerResponse.ok()
             .bodyAndAwait(
-                orderRepository.findAll()
+                chatBotOrderRepository.findAll()
             )
 
 }

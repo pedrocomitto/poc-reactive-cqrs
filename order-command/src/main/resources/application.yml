@@ -1,10 +1,6 @@
 spring:
   application:
     name: order-command
-  r2dbc:
-    url: r2dbc:pool:postgres://0.0.0.0:5432/dborder
-    username: order
-    password: order
   kafka:
     bootstrap-servers: localhost:9092
     producer:
@@ -19,7 +15,7 @@ spring:
           json:
             value:
               default:
-                type: com.pedrocomitto.poc.reactivecqrsescommand.domain.event.OrderEvent
+                type: com.pedrocomitto.poc.orderquery.domain.event.OrderEvent
             trusted:
               packages: '*'
             use:

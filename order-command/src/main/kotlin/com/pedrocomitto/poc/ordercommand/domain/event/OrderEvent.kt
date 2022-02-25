@@ -7,6 +7,11 @@ import java.util.UUID
 data class OrderEvent(
     val id: UUID,
     val type: OrderType,
-    val status: OrderStatus,
-    val customerId: UUID,
+    var status: OrderStatus,
+    val items: List<OrderItemEvent>,
+    val customer: CustomerEvent,
+    var payment: PaymentEvent? = null,
 )
+
+
+

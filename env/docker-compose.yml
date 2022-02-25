@@ -1,28 +1,31 @@
 version: "3"
 services:
-  dbcommand:
-    image: postgres:9.6
-    container_name: "dbcommand"
-    restart: always
-    environment:
-      - POSTGRES_DB=dborder
-      - POSTGRES_USER=order
-      - POSTGRES_PASSWORD=order
-      - TZ=GMT
-    ports:
-      - 5432:5432
-  dbquery:
-    image: "cassandra:4.0"
-    container_name: "dbquery"
-    restart: always
-    environment:
-      - CASSANDRA_CLUSTER_NAME=dborder
-    ports:
-      - 9042:9042
-    volumes:
-#      - ./db-cassandra-schema:/docker-entrypoint-initdb.d/
-      - ~/apps/cassandra:/var/lib/cassandra
 
+  dbcommand:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dborder
+      MONGO_INITDB_ROOT_PASSWORD: dborder
+      MONGO_INITDB_DATABASE: dbordercommand
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_command:/data/db/command
+      - ./mongo/dbordercommand-init.js:/docker-entrypoint-initdb.d/dbordercommand-init.js:ro
+
+  dbquery:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dborder
+      MONGO_INITDB_ROOT_PASSWORD: dborder
+      MONGO_INITDB_DATABASE: dborderquery
+    ports:
+      - 27018:27017
+    volumes:
+      - mongodb_data_query:/data/db/query
+      - ./mongo/dborderquery-init.js:/docker-entrypoint-initdb.d/dborderquery-init.js:ro
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -51,3 +54,7 @@ services:
     extra_hosts:
       - "moby:127.0.0.1"
       - "localhost: 127.0.0.1"
+
+volumes:
+  mongodb_data_command:
+  mongodb_data_query:

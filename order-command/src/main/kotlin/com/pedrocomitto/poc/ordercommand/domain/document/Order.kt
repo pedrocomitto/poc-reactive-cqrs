@@ -1,20 +1,19 @@
-package com.pedrocomitto.poc.ordercommand.domain.entity
+package com.pedrocomitto.poc.ordercommand.domain.document
 
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderStatus
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderType
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.Version
-import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.UUID
 
-@Table("ORDERS")
+@Document("orders")
 class Order(
     @Id
     val id: UUID = UUID.randomUUID(),
     val type: OrderType,
     var status: OrderStatus,
-    val customerId: UUID,
-    @Version
-    var version: Long = 0
+    val items: List<OrderItem>,
+    val customer: Customer,
+    var payment: Payment? = null,
 )
 

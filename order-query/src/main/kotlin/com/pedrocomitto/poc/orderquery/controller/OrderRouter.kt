@@ -1,6 +1,6 @@
 package com.pedrocomitto.poc.orderquery.controller
 
-import com.pedrocomitto.poc.orderquery.handler.OrderHandler
+import com.pedrocomitto.poc.orderquery.handler.ChatBotOrderHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.server.coRouter
@@ -9,8 +9,8 @@ import org.springframework.web.reactive.function.server.coRouter
 class OrderRouter {
 
     @Bean
-    fun routes(handler: OrderHandler) = coRouter {
-        GET("/orders", handler::findAll)
+    fun routes(handler: ChatBotOrderHandler) = coRouter {
+        GET("/orders/{id}?view=chatbot", handler::find)
     }
 
 }

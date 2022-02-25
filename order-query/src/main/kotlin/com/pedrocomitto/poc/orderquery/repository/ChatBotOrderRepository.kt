@@ -1,9 +1,9 @@
 package com.pedrocomitto.poc.orderquery.repository
 
-import com.pedrocomitto.poc.orderquery.domain.view.FullOrder
+import com.pedrocomitto.poc.orderquery.domain.view.ChatBotOrderView
 import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface OrderRepository : CoroutineCrudRepository<FullOrder, UUID>
+interface ChatBotOrderRepository : CoroutineCrudRepository<ChatBotOrderView, UUID>
