@@ -1,10 +1,9 @@
-package com.pedrocomitto.poc.ordercommand.domain.event
+package com.pedrocomitto.poc.ordercommand.domain.event.createdorder
 
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderStatus
-import java.util.UUID
 
-data class OrderEvent(
-    val uuid: UUID,
+data class CreatedOrderEvent(
+    val id: Long,
     val status: OrderStatus,
     val items: List<OrderItemEvent>,
     val customer: CustomerEvent,

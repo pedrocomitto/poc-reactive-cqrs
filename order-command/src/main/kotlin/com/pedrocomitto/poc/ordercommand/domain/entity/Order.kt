@@ -1,18 +1,11 @@
 package com.pedrocomitto.poc.ordercommand.domain.entity
 
 import com.pedrocomitto.poc.ordercommand.domain.enumeration.OrderStatus
-import org.hibernate.annotations.GeneratorType
-import org.hibernate.annotations.GenericGenerator
-import org.hibernate.annotations.Type
-import org.hibernate.id.UUIDGenerationStrategy
-import org.hibernate.id.UUIDGenerator
-import org.hibernate.type.UUIDBinaryType
-import org.hibernate.type.UUIDCharType
-import org.springframework.data.domain.Persistable
-import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -26,18 +19,16 @@ import javax.persistence.Table
 @Table(name = "orders")
 data class Order(
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator",
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    var id: UUID = UUID.randomUUID(),
+    var id: Long = 0,
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     val status: OrderStatus,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "order_id", columnDefinition = "UUID")
+    @JoinColumn(name = "order_id")
     val items: List<OrderItem> = mutableListOf(),
 
     @OneToOne(cascade = [CascadeType.ALL])
@@ -46,7 +37,7 @@ data class Order(
     @OneToOne(cascade = [CascadeType.ALL])
     val address: Address,
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-//    @JoinColumn(name = "order_id", columnDefinition = "UUID")
-//    val trackings: List<Tracking> = mutableListOf()
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "order_id")
+    val trackings: MutableList<Tracking> = mutableListOf()
 )

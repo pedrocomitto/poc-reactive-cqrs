@@ -1,8 +1,8 @@
 package com.pedrocomitto.poc.ordercommand.repository
 
-import com.pedrocomitto.poc.ordercommand.domain.entity.Order
+import com.pedrocomitto.poc.ordercommand.domain.entity.Tracking
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface OrderRepository : JpaRepository<Order, Long>
+interface TrackingRepository : JpaRepository<Tracking, Long>

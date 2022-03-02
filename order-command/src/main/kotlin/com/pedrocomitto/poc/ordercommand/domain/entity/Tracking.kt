@@ -1,5 +1,6 @@
 package com.pedrocomitto.poc.ordercommand.domain.entity
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -12,6 +13,9 @@ data class Tracking(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
-    val statusCode: String,
+    val code: String,
     val status: String,
+
+    @Column(name = "order_id")
+    val orderId: Long
 )

@@ -1,4 +1,4 @@
-package com.pedrocomitto.poc.ordercommand.domain.event
+package com.pedrocomitto.poc.ordercommand.domain.event.createdorder
 
 data class OrderItemEvent(
     val description: String,

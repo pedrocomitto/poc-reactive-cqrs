@@ -20,10 +20,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: order
       MONGO_INITDB_DATABASE: dborderquery
     ports:
-      - 27018:27017
+      - 27017:27017
     volumes:
       - mongodb_data_query:/data/db/query
-      - ./mongo/dborderquery-init.js:/docker-entrypoint-initdb.d/dborderquery-init.js:ro
+#      - ./mongo/dborderquery-init.js:/docker-entrypoint-initdb.d/dborderquery-init.js:ro
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest

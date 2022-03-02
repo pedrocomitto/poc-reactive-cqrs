@@ -4,7 +4,7 @@ import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
 import com.mongodb.reactivestreams.client.MongoClient
 import com.mongodb.reactivestreams.client.MongoClients
-import com.pedrocomitto.poc.orderquery.repository.ChatBotOrderRepository
+import com.pedrocomitto.poc.orderquery.repository.ChatbotOrderRepository
 import org.bson.UuidRepresentation
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 @Configuration
 @EnableReactiveMongoRepositories(
-    basePackageClasses = [ChatBotOrderRepository::class]
+    basePackageClasses = [ChatbotOrderRepository::class]
 )
 class MongoConfig : AbstractReactiveMongoConfiguration() {
 
@@ -23,7 +23,7 @@ class MongoConfig : AbstractReactiveMongoConfiguration() {
         MongoClients.create(
             MongoClientSettings.builder()
                 .uuidRepresentation(UuidRepresentation.JAVA_LEGACY)
-                .applyConnectionString(ConnectionString("mongodb://order:order@localhost:27018"))
+                .applyConnectionString(ConnectionString("mongodb://order:order@localhost:27017"))
                 .build()
         )
 

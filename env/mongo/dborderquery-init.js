@@ -1,7 +1,7 @@
 db.createUser(
         {
-            user: "dborder",
-            pwd: "dborder",
+            user: "order",
+            pwd: "order",
             roles: [
                 {
                     role: "readWrite",
