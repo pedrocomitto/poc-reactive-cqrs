@@ -1,6 +1,5 @@
 package com.pedrocomitto.poc.orderquery.consumer.createdorder.subscriber
 
-import com.pedrocomitto.poc.orderquery.consumer.ConsumerSubscriber
 import com.pedrocomitto.poc.orderquery.domain.event.createdorder.CreatedOrderEvent
 import com.pedrocomitto.poc.orderquery.mapper.toChatbotOrderView
 import com.pedrocomitto.poc.orderquery.repository.ChatbotOrderRepository
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class ChatbotOrderSubscriber(
     private val chatbotOrderRepository: ChatbotOrderRepository,
-) : ConsumerSubscriber<CreatedOrderEvent> {
+) : CreatedOrderConsumerSubscriber {
 
     override fun process(consumerRecord: ConsumerRecord<String, CreatedOrderEvent>) {
         run {
