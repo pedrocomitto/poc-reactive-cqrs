@@ -14,8 +14,6 @@ fun OrderRequest.toEntity(status: OrderStatus) =
         status = status,
     )
 
-
-
 fun Order.toEvent() =
     CreatedOrderEvent(
         id = id,
@@ -25,8 +23,3 @@ fun Order.toEvent() =
         address = address.toEvent(),
         trackings = trackings.map { it.toEvent() }
     )
-
-
-
-
-

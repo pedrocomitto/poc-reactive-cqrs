@@ -16,4 +16,3 @@ fun UpdatedTrackingEvent.toChatbotOrderView(orderView: ChatBotOrderView) =
         status = orderView.status,
         trackingStatus = status,
     )
-

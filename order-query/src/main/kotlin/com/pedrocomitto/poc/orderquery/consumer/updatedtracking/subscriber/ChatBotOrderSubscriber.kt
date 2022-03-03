@@ -15,15 +15,14 @@ class ChatBotOrderSubscriber(
     private val chatbotOrderRepository: ChatbotOrderRepository
 ) : UpdatedTrackingConsumerSubscriber {
 
-    override fun
-            process(consumerRecord: ConsumerRecord<String, UpdatedTrackingEvent>) {
+    override fun process(consumerRecord: ConsumerRecord<String, UpdatedTrackingEvent>) {
         run {
             CoroutineScope(Dispatchers.IO)
                 .launch {
                     val updatedTrackingEvent = consumerRecord.value()
 
                     val lastChatbotOrderView = chatbotOrderRepository.findTop1ByOrderIdOrderByCreationDateDesc(updatedTrackingEvent.orderId) ?: throw RuntimeException()
-                    println("olha oq achei $lastChatbotOrderView")
+
                     chatbotOrderRepository.save(updatedTrackingEvent.toChatbotOrderView(lastChatbotOrderView))
                 }
         }
