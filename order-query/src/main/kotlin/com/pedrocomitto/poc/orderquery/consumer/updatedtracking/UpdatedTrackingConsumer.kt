@@ -19,7 +19,7 @@ class UpdatedTrackingConsumer(
 
     @PostConstruct
     fun consume() {
-        val kafka = reactiveKafkaConsumerTemplate.receiveAutoAck()
+        reactiveKafkaConsumerTemplate.receiveAutoAck()
             .subscribe { record ->
                 subscribers.forEach { sub -> sub.process(record) }
             }
